@@ -79,6 +79,7 @@ environment = SubResource( 6 )
 
 [node name="Camera2D" type="Camera2D" parent="."]
 current = true
+zoom = Vector2( 2, 2 )
 limit_left = -5000
 limit_top = -5000
 limit_right = 5000
@@ -86,7 +87,8 @@ limit_bottom = 5000
 limit_smoothed = true
 editor_draw_limits = true
 script = ExtResource( 5 )
-zoom_max = 2.0
+zoom_min = 0.5
+zoom_max = 2.5
 
 [node name="FollowCam" type="Camera2D" parent="."]
 limit_left = -5000

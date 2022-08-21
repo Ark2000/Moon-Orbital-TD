@@ -9,7 +9,7 @@ export var smooth_zooming = true
 
 var zoom_level = 1
 var target_position := Vector2.ZERO
-var target_zoom = Vector2(1, 1)
+var target_zoom = Vector2(2, 2)
 
 func _ready():
 	target_position = position
