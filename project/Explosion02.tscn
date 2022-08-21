@@ -1,0 +1,145 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://shockwave.gdshader" type="Shader" id=1]
+[ext_resource path="res://bubble.gdshader" type="Shader" id=2]
+[ext_resource path="res://bulb.png" type="Texture" id=3]
+[ext_resource path="res://Explosion02.gd" type="Script" id=4]
+[ext_resource path="res://icon.png" type="Texture" id=5]
+
+[sub_resource type="CircleShape2D" id=1]
+radius = 100.0
+
+[sub_resource type="Animation" id=2]
+resource_name = "explode"
+length = 0.8
+tracks/0/type = "value"
+tracks/0/path = NodePath("shockwave:material:shader_param/t")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.8 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 1.152, 1.971 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("circle:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.8 ),
+"transitions": PoolRealArray( 0.3, 1 ),
+"update": 0,
+"values": [ Vector2( 0.1, 0.1 ), Vector2( 4, 4 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("circle:self_modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.3, 0.8 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0.392157 ), Color( 1, 1, 1, 0.392157 ), Color( 1, 1, 1, 0 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("shockwave:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.3, 0.8 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0.392157 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+tracks/4/type = "method"
+tracks/4/path = NodePath("CollisionShape2D")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"values": [ {
+"args": [ "disabled", false ],
+"method": "set_deferred"
+}, {
+"args": [ "disabled", true ],
+"method": "set_deferred"
+} ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("bulb:scale")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0, 0.140265, 0.306711 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0.1, 0.1 ), Vector2( 1, 1 ), Vector2( 0.1, 0.1 ) ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("bulb:modulate")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0, 0.140265, 0.306711 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+
+[sub_resource type="ShaderMaterial" id=3]
+resource_local_to_scene = true
+shader = ExtResource( 1 )
+shader_param/WaveParams = Vector3( 10, 0.8, 0.1 )
+shader_param/t = 1.971
+
+[sub_resource type="ShaderMaterial" id=4]
+shader = ExtResource( 2 )
+
+[node name="Explosion02" type="Area2D"]
+collision_layer = 0
+collision_mask = 2
+script = ExtResource( 4 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 1 )
+disabled = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "explode"
+anims/explode = SubResource( 2 )
+
+[node name="shockwave" type="Sprite" parent="."]
+visible = false
+modulate = Color( 1, 1, 1, 0 )
+material = SubResource( 3 )
+scale = Vector2( 10, 10 )
+texture = ExtResource( 5 )
+
+[node name="circle" type="Sprite" parent="."]
+self_modulate = Color( 1, 1, 1, 0 )
+material = SubResource( 4 )
+scale = Vector2( 4, 4 )
+texture = ExtResource( 5 )
+
+[node name="bulb" type="Sprite" parent="."]
+modulate = Color( 1, 1, 1, 0 )
+scale = Vector2( 0.1, 0.1 )
+texture = ExtResource( 3 )
+
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]

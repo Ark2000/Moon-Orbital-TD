@@ -1,0 +1,31 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://BuffArea.gd" type="Script" id=1]
+[ext_resource path="res://circle2.png" type="Texture" id=2]
+[ext_resource path="res://plain-circle.png" type="Texture" id=3]
+
+[sub_resource type="CircleShape2D" id=1]
+resource_local_to_scene = true
+radius = 400.0
+
+[node name="BuffArea" type="Area2D"]
+collision_layer = 16
+collision_mask = 0
+script = ExtResource( 1 )
+buff_name = "B20"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+modulate = Color( 0.219608, 0.862745, 0.105882, 1 )
+shape = SubResource( 1 )
+
+[node name="Sprite" type="Sprite" parent="."]
+modulate = Color( 0.258824, 0.788235, 0.176471, 0.54902 )
+self_modulate = Color( 1, 1, 1, 0.392157 )
+scale = Vector2( 1.56, 1.56 )
+texture = ExtResource( 2 )
+
+[node name="Sprite2" type="Sprite" parent="."]
+modulate = Color( 0.380392, 0.866667, 0.631373, 0.0627451 )
+self_modulate = Color( 1, 1, 1, 0.392157 )
+scale = Vector2( 1.682, 1.682 )
+texture = ExtResource( 3 )

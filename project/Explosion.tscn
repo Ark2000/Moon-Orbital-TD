@@ -1,0 +1,61 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Explosion.gd" type="Script" id=61]
+[ext_resource path="res://flare_01.png" type="Texture" id=62]
+[ext_resource path="res://halo.png" type="Texture" id=63]
+
+[sub_resource type="Animation" id=2]
+resource_name = "New Anim"
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.6 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 3, 3 ), Vector2( 1, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.6 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 3, 3, 3, 1 ), Color( 0, 0, 0, 0 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Sprite2:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 0.241484, 1 ),
+"update": 0,
+"values": [ Color( 3, 3, 2, 1 ), Color( 3, 3, 2, 0 ) ]
+}
+
+[node name="Explosion" type="Node2D"]
+script = ExtResource( 61 )
+
+[node name="Sprite2" type="Sprite" parent="."]
+modulate = Color( 3, 3, 2, 0.0251403 )
+scale = Vector2( 3, 3 )
+texture = ExtResource( 63 )
+
+[node name="Sprite" type="Sprite" parent="."]
+modulate = Color( 0.0543997, 0.0543997, 0.0543997, 0.0181332 )
+scale = Vector2( 1.03627, 1.03627 )
+texture = ExtResource( 62 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "New Anim"
+"anims/New Anim" = SubResource( 2 )

@@ -1,0 +1,133 @@
+[gd_scene load_steps=12 format=2]
+
+[ext_resource path="res://nasalization-rg.otf" type="DynamicFontData" id=1]
+[ext_resource path="res://bg_space_seamless_fl1.png" type="Texture" id=2]
+[ext_resource path="res://bg_space_seamless_fl2.png" type="Texture" id=3]
+[ext_resource path="res://bg_space_seamless.png" type="Texture" id=4]
+[ext_resource path="res://Home.gd" type="Script" id=5]
+[ext_resource path="res://moon.png" type="Texture" id=6]
+[ext_resource path="res://big_font.tres" type="DynamicFont" id=7]
+[ext_resource path="res://small_font.tres" type="DynamicFont" id=8]
+
+[sub_resource type="DynamicFont" id=1]
+size = 80
+use_mipmaps = true
+use_filter = true
+font_data = ExtResource( 1 )
+
+[sub_resource type="Animation" id=2]
+resource_name = "New Anim"
+length = 2.0
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Background/Label2:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1, 2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=3]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Background/Label2:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ) ]
+}
+
+[node name="Home" type="Node2D"]
+script = ExtResource( 5 )
+
+[node name="Background" type="CanvasLayer" parent="."]
+layer = -1
+
+[node name="TextureRect" type="TextureRect" parent="Background"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+texture = ExtResource( 4 )
+expand = true
+stretch_mode = 2
+
+[node name="TextureRect2" type="TextureRect" parent="Background"]
+margin_left = -5000.0
+margin_top = -5000.0
+margin_right = 5000.0
+margin_bottom = 5000.0
+mouse_filter = 2
+texture = ExtResource( 2 )
+expand = true
+stretch_mode = 2
+
+[node name="TextureRect3" type="TextureRect" parent="Background"]
+margin_left = -5000.0
+margin_top = -5000.0
+margin_right = 5000.0
+margin_bottom = 5000.0
+mouse_filter = 2
+texture = ExtResource( 3 )
+expand = true
+stretch_mode = 2
+
+[node name="Label" type="Label" parent="Background"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -342.0
+margin_top = -356.0
+margin_right = 342.0
+margin_bottom = -260.0
+custom_fonts/font = SubResource( 1 )
+text = "Moon Orbital TD"
+
+[node name="Label2" type="Label" parent="Background"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -127.0
+margin_top = 270.0
+margin_right = 127.0
+margin_bottom = 295.0
+custom_fonts/font = ExtResource( 7 )
+text = "Press [Enter] to Continue"
+
+[node name="Label3" type="Label" parent="Background"]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -92.0
+margin_top = -17.0
+custom_fonts/font = ExtResource( 8 )
+text = "Made by k2kra"
+
+[node name="Moon" type="Sprite" parent="."]
+texture = ExtResource( 6 )
+
+[node name="Camera2D" type="Camera2D" parent="."]
+current = true
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 3.0
+autostart = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "New Anim"
+"anims/New Anim" = SubResource( 2 )
+anims/RESET = SubResource( 3 )
+
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

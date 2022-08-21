@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://EnemySpawner.gd" type="Script" id=1]
+
+[node name="EnemySpawner" type="ColorRect"]
+margin_left = -10482.0
+margin_top = -1877.0
+margin_right = -9482.0
+margin_bottom = 2123.0
+color = Color( 1, 0, 0, 0.392157 )
+script = ExtResource( 1 )
